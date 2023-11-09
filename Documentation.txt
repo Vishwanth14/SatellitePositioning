@@ -1,0 +1,49 @@
+Title: Satellite Position Analysis with Parallel Processing
+
+Introduction:
+This code is designed to analyze the positions of multiple satellites using Two-Line Element Sets (TLEs) and the SGP4 propagation model. The primary objective is to determine the location of these satellites in space, convert their positions to latitude, longitude, and altitude (LLA) coordinates, and identify when they pass over specified geographic regions. Additionally, the code is optimized for performance by utilizing parallel processing with the Ray framework.
+
+Requirements:
+Before running the code, ensure you have the following installed:
+Python
+Pyproj
+SGP4 (using the sgp4 library)
+Ray
+
+Code Overview:
+
+Import Libraries:
+Import necessary Python libraries, including Pyproj, datetime, sgp4, and Ray.
+
+Load TLE Data:
+Read TLE data from a file ("30sats.txt" or "27000sats.txt") that contains the information for various satellites.
+Define Geographic Regions:
+Specify coordinates for latitude and longitude regions where we want to track satellite passes.
+
+Initialize Ray:
+Initialize Ray with memory settings to optimize parallel processing.
+
+Conversion Functions:
+Define a function, ecef2lla, to convert ECEF (Earth-Centered, Earth-Fixed) coordinates to LLA (Latitude, Longitude, Altitude).
+Define a function, is_within_region, to check if a position is within a specified geographic region.
+
+Generate State Vectors:
+Create a function, generate_state_vectors, to calculate the state vectors of a satellite for a specified time range. This function is parallelized using Ray.
+For each satellite, the code calculates its position and velocity for a five-day duration with a 1 second or 0.1 second time interval
+
+Save to File:
+Define a function, save_to_file, to save the filtered results to a text file.
+
+Main Program:
+In the main program, we use Ray to process the TLE data for multiple satellites in parallel.
+We measure the execution time and print it to the console.
+After processing is complete, we save the filtered results to a text file.
+
+Execution:
+To run the code, make sure you have installed the required libraries. Execute the code in a Python environment, and it will process the TLE data for multiple satellites, generate state vectors, and identify when these satellites pass over the specified geographic regions.
+
+Optimization:
+The code is optimized for performance using parallel processing with the Ray framework. This allows for faster processing of satellite data, making it suitable for handling a large number of satellites with minimal computation time.
+
+Conclusion:
+This code provides a scalable and efficient solution for analyzing the positions of satellites, converting them to geographic coordinates, and identifying when they pass over specific regions. It is a useful tool for satellite tracking and analysis.
